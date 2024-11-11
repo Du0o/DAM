@@ -1,0 +1,16 @@
+M
+ted
+100
+100
+100
+100
+50
+50
+0
+0
+None
+None
+None
+basicWand
+None
+1
