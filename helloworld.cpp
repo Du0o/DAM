@@ -304,5 +304,53 @@ int main() {
       cin >> input;
     }
   }
+  if (campainIndex == 2){
+    system("Color 06");
+    if (chapterIndex == 0){
+      system("cls");
+      cout << R"(
+   _____     _____    ______   __  ______             _____   _______            _______   __    __    __    _____  
+  ) ___ (   /\___/\  / ____/\ /\_\/ ____/\    |     ) ___ (  /\_____\     |    /\_______)\/\_\  /_/\  /\_\ /\_____\
+ / /\_/\ \ / / _ \ \ ) ) __\/ \/_/) ) __\/    |     / /\_/\ \( (  ___/    |    \(___  __\/\/_/  ) ) \/ ( (( (_____/ 
+/ /_/ (_\ \\ \(_)/ /  \ \ \    /\_\\ \ \      |    / /_/ (_\ \\ \ \_      |      / / /     /\_\/_/ \  / \_\\ \__\
+\ \ )_/ / // / _ \ \  _\ \ \  / / /_\ \ \     |    \ \ )_/ / // / /_\     |     ( ( (     / / /\ \ \\// / // /__/_  
+ \ \/_\/ /( (_( )_) ))____) )( (_()____) )    |     \ \/_\/ // /____/     |      \ \ \   ( (_(  )_) )( (_(( (_____\
+  )_____(  \/_/ \_\/ \____\/  \/_/\____\/     |      )_____( \/_/         |      /_/_/    \/_/  \_\/  \/_/ \/_____/ 
+                                                                                                                    
+      )" << "\n";
+      cout << "Chapter 0: Sands \n";
+      cin >> input;
+      battle(health, mana, damage, speed, maxHealth, maxMana, clas, weapon, armor, artfact1, artfact2, artfact3, slimeEnemy.name, slimeEnemy.enemyhealth, slimeEnemy.maxEnemyHealth, slimeEnemy.enemyDamage, slimeEnemy.enemySpeed, slimeEnemy.sprite, gold, slimeEnemy.goldDrop , Inventory);
+      system("cls");
+      if (health <= 0){
+        death(name);
+      }
+      cin >> input;
+    }
+  }
+  if (campainIndex == 3){
+    system("Color 06");
+    if (chapterIndex == 0){
+      system("cls");
+      cout << R"(
+   _____     _____    ______   __  ______             _____   _______            _______   __    __    __    _____  
+  ) ___ (   /\___/\  / ____/\ /\_\/ ____/\    |     ) ___ (  /\_____\     |    /\_______)\/\_\  /_/\  /\_\ /\_____\
+ / /\_/\ \ / / _ \ \ ) ) __\/ \/_/) ) __\/    |     / /\_/\ \( (  ___/    |    \(___  __\/\/_/  ) ) \/ ( (( (_____/ 
+/ /_/ (_\ \\ \(_)/ /  \ \ \    /\_\\ \ \      |    / /_/ (_\ \\ \ \_      |      / / /     /\_\/_/ \  / \_\\ \__\
+\ \ )_/ / // / _ \ \  _\ \ \  / / /_\ \ \     |    \ \ )_/ / // / /_\     |     ( ( (     / / /\ \ \\// / // /__/_  
+ \ \/_\/ /( (_( )_) ))____) )( (_()____) )    |     \ \/_\/ // /____/     |      \ \ \   ( (_(  )_) )( (_(( (_____\
+  )_____(  \/_/ \_\/ \____\/  \/_/\____\/     |      )_____( \/_/         |      /_/_/    \/_/  \_\/  \/_/ \/_____/ 
+                                                                                                                    
+      )" << "\n";
+      cout << "Chapter 0: Sands \n";
+      cin >> input;
+      battle(health, mana, damage, speed, maxHealth, maxMana, clas, weapon, armor, artfact1, artfact2, artfact3, slimeEnemy.name, slimeEnemy.enemyhealth, slimeEnemy.maxEnemyHealth, slimeEnemy.enemyDamage, slimeEnemy.enemySpeed, slimeEnemy.sprite, gold, slimeEnemy.goldDrop , Inventory);
+      system("cls");
+      if (health <= 0){
+        death(name);
+      }
+      cin >> input;
+    }
+  }
   return 0;
 }
