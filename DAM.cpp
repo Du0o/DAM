@@ -8,8 +8,32 @@
 using namespace std;
 
 
-void death(string name){
-  
+void death(){
+  cout << R"(
+                                   _____  _____
+                                <     `/     |
+                                 >          (
+                                |   _     _  |
+                                |  |_) | |_) |
+                                |  | \ | |   |
+                                |            |
+                 ______.______%_|            |__________  _____
+               _/                                       \|     |
+              |                                                <
+              |_____.-._________              ____/|___________|
+                                |            |
+                                |            |
+                                |            |
+                                |            |
+                                |   _        <
+                                |__/         |
+                                 / `--.      |
+                               %|            |%
+                           |/.%%|          -< @%%%
+                           `\%`@|     v      |@@%@%%    - mfj
+                         .%%%@@@|%    |    % @@@%%@%%%%
+                    _.%%%%%%@@@@@@%%_/%\_%@@%%@@@@@@@%%%%%%
+  )";
 }
 void showStats(float health, float mana, float damage, float speed, float maxHealth, float maxMana, char classs, string weapon, string armor, string art1, string art2, string art3 ){
   cout << "Your Stats:\n Class: " << classs << "\n Health: " << health << "/" << maxHealth << "\n Mana: " << mana << "/" << maxMana << "\n Damage: " << damage << "\n Speed: " << speed << "\n" << "\n Weapon: " << weapon << "\n" << "\n Armor: " << armor << "\n" << "\n Artifact1: " << art1 << "\n" << "\n Artifact2: " << art2 << "\n" << "\n Artifact3: " << art3 << "\n";
@@ -93,6 +117,8 @@ void battle(float health, float mana, float damage, float speed, float maxHealth
       cout << "You took " << enemyDamage << "!" << endl;
       health -= enemyDamage;
       if (health <= 0){
+        death();
+        exit(0);
         return;
       }
     } else {
@@ -124,6 +150,8 @@ void battle(float health, float mana, float damage, float speed, float maxHealth
           }
         }
         if (health <= 0){
+          death();
+          exit(0);
           return;
         }
       }
@@ -131,10 +159,14 @@ void battle(float health, float mana, float damage, float speed, float maxHealth
         showInventory(Inventory, gold);
       }
       if (input == 'E'){
+        death();
+        exit(0);
         return;
       }
       health -= enemyDamage;
       if (health <= 0){
+        death();
+        exit(0);
         return;
       }
     }
@@ -298,9 +330,6 @@ int main() {
       cin >> input;
       battle(health, mana, damage, speed, maxHealth, maxMana, clas, weapon, armor, artfact1, artfact2, artfact3, slimeEnemy.name, slimeEnemy.enemyhealth, slimeEnemy.maxEnemyHealth, slimeEnemy.enemyDamage, slimeEnemy.enemySpeed, slimeEnemy.sprite, gold, slimeEnemy.goldDrop , Inventory);
       system("cls");
-      if (health <= 0){
-        death(name);
-      }
       cin >> input;
     }
   }
@@ -314,6 +343,7 @@ int main() {
  / /\_/\ \ / / _ \ \ ) ) __\/ \/_/) ) __\/    |     / /\_/\ \( (  ___/    |    \(___  __\/\/_/  ) ) \/ ( (( (_____/ 
 / /_/ (_\ \\ \(_)/ /  \ \ \    /\_\\ \ \      |    / /_/ (_\ \\ \ \_      |      / / /     /\_\/_/ \  / \_\\ \__\
 \ \ )_/ / // / _ \ \  _\ \ \  / / /_\ \ \     |    \ \ )_/ / // / /_\     |     ( ( (     / / /\ \ \\// / // /__/_  
+
  \ \/_\/ /( (_( )_) ))____) )( (_()____) )    |     \ \/_\/ // /____/     |      \ \ \   ( (_(  )_) )( (_(( (_____\
   )_____(  \/_/ \_\/ \____\/  \/_/\____\/     |      )_____( \/_/         |      /_/_/    \/_/  \_\/  \/_/ \/_____/ 
                                                                                                                     
@@ -323,7 +353,7 @@ int main() {
       battle(health, mana, damage, speed, maxHealth, maxMana, clas, weapon, armor, artfact1, artfact2, artfact3, slimeEnemy.name, slimeEnemy.enemyhealth, slimeEnemy.maxEnemyHealth, slimeEnemy.enemyDamage, slimeEnemy.enemySpeed, slimeEnemy.sprite, gold, slimeEnemy.goldDrop , Inventory);
       system("cls");
       if (health <= 0){
-        death(name);
+        death();
       }
       cin >> input;
     }
@@ -337,7 +367,7 @@ int main() {
   ) ___ (   /\___/\  / ____/\ /\_\/ ____/\    |     ) ___ (  /\_____\     |    /\_______)\/\_\  /_/\  /\_\ /\_____\
  / /\_/\ \ / / _ \ \ ) ) __\/ \/_/) ) __\/    |     / /\_/\ \( (  ___/    |    \(___  __\/\/_/  ) ) \/ ( (( (_____/ 
 / /_/ (_\ \\ \(_)/ /  \ \ \    /\_\\ \ \      |    / /_/ (_\ \\ \ \_      |      / / /     /\_\/_/ \  / \_\\ \__\
-\ \ )_/ / // / _ \ \  _\ \ \  / / /_\ \ \     |    \ \ )_/ / // / /_\     |     ( ( (     / / /\ \ \\// / // /__/_  
+
  \ \/_\/ /( (_( )_) ))____) )( (_()____) )    |     \ \/_\/ // /____/     |      \ \ \   ( (_(  )_) )( (_(( (_____\
   )_____(  \/_/ \_\/ \____\/  \/_/\____\/     |      )_____( \/_/         |      /_/_/    \/_/  \_\/  \/_/ \/_____/ 
                                                                                                                     
@@ -347,7 +377,7 @@ int main() {
       battle(health, mana, damage, speed, maxHealth, maxMana, clas, weapon, armor, artfact1, artfact2, artfact3, slimeEnemy.name, slimeEnemy.enemyhealth, slimeEnemy.maxEnemyHealth, slimeEnemy.enemyDamage, slimeEnemy.enemySpeed, slimeEnemy.sprite, gold, slimeEnemy.goldDrop , Inventory);
       system("cls");
       if (health <= 0){
-        death(name);
+        death();
       }
       cin >> input;
     }
