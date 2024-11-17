@@ -7,8 +7,21 @@
 #include <thread>
 using namespace std;
 
+string weapon = "None";
+string armor = "None";
+string artfact1 = "None";
+string artfact2 = "None";
+string artfact3 = "None";
+int chapterIndex = 0, campainIndex = 0;
+char input, clas;
+string name;
+bool makClass = false, play = false;
+float health, maxHealth, mana, maxMana, damage, speed;
+vector<string> Inventory = {"yoo", "mak"};
+int gold = 0;
 
 void death(){
+  system("cls");
   cout << R"(
                                    _____  _____
                                 <     `/     |
@@ -34,19 +47,51 @@ void death(){
                          .%%%@@@|%    |    % @@@%%@%%%%
                     _.%%%%%%@@@@@@%%_/%\_%@@%%@@@@@@@%%%%%%
   )";
+  cin >> input;
 }
-void showStats(float health, float mana, float damage, float speed, float maxHealth, float maxMana, char classs, string weapon, string armor, string art1, string art2, string art3 ){
-  cout << "Your Stats:\n Class: " << classs << "\n Health: " << health << "/" << maxHealth << "\n Mana: " << mana << "/" << maxMana << "\n Damage: " << damage << "\n Speed: " << speed << "\n" << "\n Weapon: " << weapon << "\n" << "\n Armor: " << armor << "\n" << "\n Artifact1: " << art1 << "\n" << "\n Artifact2: " << art2 << "\n" << "\n Artifact3: " << art3 << "\n";
+void shop(string item1, string item2, string item3, string item4, string item5, int cost1, int cost2, int cost3, int cost4, int cost5){
+cout << R"(
+____________________________________________________
+________             _________.__                   
+\______ \ _____     /   _____/|  |__   ____ ______  
+ |    |  \\__  \    \_____  \ |  |  \ /  _ \\____ \
+ |    `   \/ __ \_  /        \|   Y  (  <_> )  |_> >
+/_______  (____  / /_______  /|___|  /\____/|   __/ 
+        \/     \/          \/      \/       |__|    
+____________________________________________________
+)" << endl;
+  cout << "Welcome to the shop! You have " << gold << " gold.";
+  cout << "\n 1. " << item1 << "\n 2. " << item2 << "\n 3. " << item3 << "\n 4. " << item4 << "\n 5. " << item5 << endl;
+  int choice;
+  cin >> choice;
+  switch(choice){
+    case 1:
+      gold -= cost1;
+    case 2:
+      gold -= cost2;
+    case 3:
+      gold -= cost3;
+    case 4:
+      gold -= cost4;
+    case 5:
+      gold -= cost5;
+  }
 }
-void saveData(vector<string> Inventory, float health, float mana, float damage, float speed, float maxHealth, float maxMana, char classs, string name, int gold, int chapter, string art1, string art2, string art3, string weapon, string armor, int campain){
+void showStats(){
+  cout << "Your Stats:\n Class: " << clas << "\n Health: " << health << "/" << maxHealth << "\n Mana: " << mana << "/" << maxMana << "\n Damage: " << damage << "\n Speed: " << speed << "\n" << "\n Weapon: " << weapon << "\n" << "\n Armor: " << armor << "\n" << "\n Artifact1: " << artfact1 << "\n" << "\n Artifact2: " << artfact2 << "\n" << "\n Artifact3: " << artfact3 << "\n";
+}
+//
+void saveData(){
   ofstream file("saveData.txt");
-  file << classs << "\n" << name << "\n" << health << "\n" << maxHealth << "\n" << mana << "\n" << maxMana << "\n" << damage << "\n" << speed << "\n" << gold << "\n" << chapter << "\n" << art1 << "\n" << art2 << "\n" << art3 << "\n" << weapon << "\n" << armor << "\n" << campain << "\n";
+  file << clas << "\n" << name << "\n" << health << "\n" << maxHealth << "\n" << mana << "\n" << maxMana << "\n" << damage << "\n" << speed << "\n" << gold << "\n" << chapterIndex << "\n" << artfact1 << "\n" << artfact2 << "\n" << artfact3 << "\n" << weapon << "\n" << armor << "\n" << campainIndex << "\n";
   for (string item : Inventory){
     file << item << "\n";
   }
   file.close();
 }
-void showInventory(vector<string> Inventory, int gold){
+//saveData(Inventory, health, mana, damage, speed, maxHealth, maxMana, clas, name, gold, chapterIndex, artfact1, artfact2, artfact3, weapon, armor, campainIndex);
+
+void showInventory(){
   char reponce;
   int itemIndex =  0;
   int input;
@@ -156,7 +201,7 @@ void battle(float health, float mana, float damage, float speed, float maxHealth
         }
       }
       if (input == 'I'){
-        showInventory(Inventory, gold);
+        showInventory();
       }
       if (input == 'E'){
         death();
@@ -182,18 +227,7 @@ int main() {
   //cout << "\e[8;50;50t";
   system("Color 03");
   // setup variables
-  string weapon = "None";
-  string armor = "None";
-  string artfact1 = "None";
-  string artfact2 = "None";
-  string artfact3 = "None";
-  int chapterIndex = 0, campainIndex = 0;
-  char input, clas;
-  string name;
-  bool makClass = false, play = false;
-  float health, maxHealth, mana, maxMana, damage, speed;
-  vector<string> Inventory = {"yoo", "mak"};
-  int gold = 0;
+
   
   cout << R"(
    ______   _______  _______ 
@@ -260,7 +294,7 @@ int main() {
     cin >> input;
     if (input == 'S'){
       system("cls");
-      showStats(health, mana, damage, speed, maxHealth, maxMana, clas, weapon, armor, artfact1, artfact2, artfact3);
+      showStats();
     }
     else if (input == 'H'){
       system("cls");
@@ -270,7 +304,7 @@ int main() {
       return 0;
     }
     else if (input == 'I'){
-      showInventory(Inventory, gold);
+      showInventory();
     }
     else if (input == 'A'){
       // start adventure
@@ -283,13 +317,13 @@ int main() {
         if (clas == 'W'){
           weapon = "basicSword";
         }
-        if (clas == 'A'){
+        else if (clas == 'A'){
           weapon = "basicBow";
         }
         else {
           weapon = "basicWand";
         }
-        saveData(Inventory, health, mana, damage, speed, maxHealth, maxMana, clas, name, gold, chapterIndex, artfact1, artfact2, artfact3, weapon, armor, campainIndex);
+        saveData();
         
       }
       play = true;
@@ -326,11 +360,9 @@ int main() {
   )_____(  \/_/ \_\/ \____\/  \/_/\____\/     |      )_____( \/_/         |      /_/_/    \/_/  \_\/  \/_/ \/_____/ 
                                                                                                                     
       )" << "\n";
-      cout << "Chapter 0: Sands \n";
-      cin >> input;
-      battle(health, mana, damage, speed, maxHealth, maxMana, clas, weapon, armor, artfact1, artfact2, artfact3, slimeEnemy.name, slimeEnemy.enemyhealth, slimeEnemy.maxEnemyHealth, slimeEnemy.enemyDamage, slimeEnemy.enemySpeed, slimeEnemy.sprite, gold, slimeEnemy.goldDrop , Inventory);
-      system("cls");
-      cin >> input;
+      cout << "Chapter 0: Sands" << endl;
+      shop("none", "none", "none", "none", "none", 10, 20, 30, 40, 50);
+      cout << "" << endl;
     }
   }
   if (campainIndex == 2){
