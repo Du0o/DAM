@@ -7,6 +7,8 @@ just run DAM with tree icon
 
 MAKE SURE YOU ARE IN THE DND-bot-main\DND-bot-main DIR WHEN RUNNING PROGRAM OF SAVE DATA WONT WORK PROPERLY
 
+Made for windows idk if it works on mac and linux/unix // please contact me if its working on other OS's :]
+
 # How to customize
 Use battle(ENEMY NAME.name, {ENEMY NAME}.enemyhealth, {ENEMY NAME}.maxEnemyHealth, {ENEMY NAME}.enemyDamage, {ENEMY NAME}.enemySpeed, {ENEMY NAME}.sprite, gold, {ENEMY NAME}.goldDrop, Inventory); when you want to intagate a battle  
 
