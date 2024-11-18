@@ -20,6 +20,83 @@ float health, maxHealth, mana, maxMana, damage, speed;
 vector<string> Inventory = {"yoo", "mak"};
 int gold = 0;
 
+void updateStats(){
+  maxHealth = 100;
+  if (clas == 'M'){
+    maxMana = 100;
+  }
+  float extraHealth, extraMana;
+  if (armor == "None"){
+    extraHealth = 0;
+  }
+  else if (armor == "warriorRobe"){
+    extraHealth = 75;
+  }
+  else if (armor == "archerRobe"){
+    extraHealth = 30;
+  }
+  else if (armor == "None"){
+    extraHealth = 40;
+  }
+  if (weapon == "basicSword"){
+    damage = 25;
+    speed = 75;
+  }
+  else if (weapon == "basicBow"){
+    damage = 75;
+    speed = 25;
+  }
+  else if (weapon == "basicWand"){
+    damage = 50;
+    speed = 50;
+  }
+  if (artfact1 == "None" || artfact2 == "None" || artfact3 == "None"){
+    extraMana = 100;
+  }
+  else if (artfact1 == "manaSkull" || artfact2 == "manaSkull" || artfact3 == "manaSkull"){
+    extraMana = 100;
+  }
+  maxHealth += extraHealth;
+  maxMana += extraMana;
+}
+void useItem(string item){
+  if(item == "HealthPotion" && health < maxHealth){
+    health += 20;
+    if(health > maxHealth)
+      health = maxHealth;
+  }
+  else if(item == "ManaPotion" && mana < maxMana){
+    mana += 20;
+    if(mana > maxMana)
+      mana = maxMana;
+    cout << "Mana Potion used. Your mana is now at " << mana << "/" << maxMana << endl;
+  }
+  else if(item == "warriorRobe"){
+    armor = item;
+    updateStats();
+  }
+  else if(item == "basicSword"){
+    weapon = item;
+    updateStats();
+  }
+  else if(item == "manaSkull"){
+    cout << "Which artifact slot? (1|2|3): ";
+    cin >> input;
+    if(input == '1'){
+      artfact1 = item;
+    }
+    if(input == '2'){
+      artfact2 = item;
+    }
+    if(input == '3'){
+      artfact3 = item;
+    }
+  }
+  else if(item == "yoo"){
+    cout << "whoo are yoooooooo" << endl;
+  }else
+    cout << "You don't have that item." << endl;
+}
 void death(){
   system("cls");
   cout << R"(
@@ -67,42 +144,46 @@ void shop(string item1, string item2, string item3, string item4, string item5, 
     cout << "\n 1. " << item1 << "\n 2. " << item2 << "\n 3. " << item3 << "\n 4. " << item4 << "\n 5. " << item5 << endl;
     int choice;
     cin >> choice;
-    switch(choice){
-      case 1:
-        cout << "Are you sure you want to buy " << item1 << "?" << endl;
-        cin >> input;
-        if (input == 'y'){
-          gold -= cost1;
-          Inventory.push_back(item1);
-        }
-      case 2:
-        cout << "Are you sure you want to buy " << item2 << "?" << endl;
-        cin >> input;
-        if (input == 'y'){
-          gold -= cost2;
-          Inventory.push_back(item2);
-        }
-      case 3:
-        cout << "Are you sure you want to buy " << item3 << "?" << endl;
-        cin >> input;
-        if (input == 'y'){
-          gold -= cost3;
-          Inventory.push_back(item3);
-        }
-      case 4:
-        cout << "Are you sure you want to buy " << item4 << "?" << endl;
-        cin >> input;
-        if (input == 'y'){
-          gold -= cost4;
-          Inventory.push_back(item4);
-        }
-      case 5:
-        cout << "Are you sure you want to buy " << item5 << "?" << endl;
-        cin >> input;
-        if (input == 'y'){
-          gold -= cost5;
-          Inventory.push_back(item5);
-        }
+    
+    if (choice == 1){
+      cout << "Are you sure you want to buy " << item1 << "? y/n: ";
+      cin >> input;
+      if (input == 'y'){
+        gold -= cost1;
+        Inventory.push_back(item1);
+      }
+    }
+    else if (choice == 2){
+      cout << "Are you sure you want to buy " << item2 << "? y/n: ";
+      cin >> input;
+      if (input == 'y'){
+        gold -= cost2;
+        Inventory.push_back(item2);
+      }
+    }
+    else if (choice == 3){
+      cout << "Are you sure you want to buy " << item3 << "? y/n: ";
+      cin >> input;
+      if (input == 'y'){
+        gold -= cost3;
+        Inventory.push_back(item3);
+      }
+    }
+    else if (choice == 4){
+      cout << "Are you sure you want to buy " << item4 << "? y/n: ";
+      cin >> input;
+      if (input == 'y'){
+        gold -= cost4;
+        Inventory.push_back(item4);
+      }
+    }
+    else{
+      cout << "Are you sure you want to buy " << item5 << "? y/n: ";
+      cin >> input;
+      if (input == 'y'){
+        gold -= cost5;
+        Inventory.push_back(item5);
+      }
     }
     cout << "Are you done shoping? y/n: ";
     cin >> input;
@@ -123,7 +204,6 @@ void saveData(){
   }
   file.close();
 }
-//saveData(Inventory, health, mana, damage, speed, maxHealth, maxMana, clas, name, gold, chapterIndex, artfact1, artfact2, artfact3, weapon, armor, campainIndex);
 
 void showInventory(){
   char reponce;
@@ -148,7 +228,7 @@ void showInventory(){
     cout << "Are you sure you want to use " << Inventory[input] << "? y/n: ";
     cin >> reponce;
     if (reponce == 'y'){
-      
+      useItem(Inventory[input]);
     }
   }
 }
@@ -394,8 +474,10 @@ int main() {
                                                                                                                     
       )" << "\n";
       cout << "Chapter 0: Sands" << endl;
-      shop("none", "none", "none", "none", "none", 10, 20, 30, 40, 50);
+      shop("HealthPotion", "none", "none", "none", "none", 10, 20, 30, 40, 50);
+      showInventory();
       cout << "" << endl;
+      cin >> input;
     }
   }
   if (campainIndex == 2){
