@@ -50,31 +50,65 @@ void death(){
   cin >> input;
 }
 void shop(string item1, string item2, string item3, string item4, string item5, int cost1, int cost2, int cost3, int cost4, int cost5){
-cout << R"(
-____________________________________________________
-________             _________.__                   
-\______ \ _____     /   _____/|  |__   ____ ______  
- |    |  \\__  \    \_____  \ |  |  \ /  _ \\____ \
- |    `   \/ __ \_  /        \|   Y  (  <_> )  |_> >
-/_______  (____  / /_______  /|___|  /\____/|   __/ 
-        \/     \/          \/      \/       |__|    
-____________________________________________________
-)" << endl;
-  cout << "Welcome to the shop! You have " << gold << " gold.";
-  cout << "\n 1. " << item1 << "\n 2. " << item2 << "\n 3. " << item3 << "\n 4. " << item4 << "\n 5. " << item5 << endl;
-  int choice;
-  cin >> choice;
-  switch(choice){
-    case 1:
-      gold -= cost1;
-    case 2:
-      gold -= cost2;
-    case 3:
-      gold -= cost3;
-    case 4:
-      gold -= cost4;
-    case 5:
-      gold -= cost5;
+  bool shoping = true;
+  while(shoping == true){
+    system("cls");
+  cout << R"(
+  ____________________________________________________
+  ________             _________.__                   
+  \______ \ _____     /   _____/|  |__   ____ ______  
+  |    |  \\__  \    \_____  \ |  |  \ /  _ \\____ \
+  |    `   \/ __ \_  /        \|   Y  (  <_> )  |_> >
+  /_______  (____  / /_______  /|___|  /\____/|   __/ 
+          \/     \/          \/      \/       |__|    
+  ____________________________________________________
+  )" << endl;
+    cout << "Welcome to the shop! You have " << gold << " gold.";
+    cout << "\n 1. " << item1 << "\n 2. " << item2 << "\n 3. " << item3 << "\n 4. " << item4 << "\n 5. " << item5 << endl;
+    int choice;
+    cin >> choice;
+    switch(choice){
+      case 1:
+        cout << "Are you sure you want to buy " << item1 << "?" << endl;
+        cin >> input;
+        if (input == 'y'){
+          gold -= cost1;
+          Inventory.push_back(item1);
+        }
+      case 2:
+        cout << "Are you sure you want to buy " << item2 << "?" << endl;
+        cin >> input;
+        if (input == 'y'){
+          gold -= cost2;
+          Inventory.push_back(item2);
+        }
+      case 3:
+        cout << "Are you sure you want to buy " << item3 << "?" << endl;
+        cin >> input;
+        if (input == 'y'){
+          gold -= cost3;
+          Inventory.push_back(item3);
+        }
+      case 4:
+        cout << "Are you sure you want to buy " << item4 << "?" << endl;
+        cin >> input;
+        if (input == 'y'){
+          gold -= cost4;
+          Inventory.push_back(item4);
+        }
+      case 5:
+        cout << "Are you sure you want to buy " << item5 << "?" << endl;
+        cin >> input;
+        if (input == 'y'){
+          gold -= cost5;
+          Inventory.push_back(item5);
+        }
+    }
+    cout << "Are you done shoping? y/n: ";
+    cin >> input;
+    if (input == 'y'){
+      shoping = false;
+    }
   }
 }
 void showStats(){
@@ -148,8 +182,7 @@ class Slime{
 };
 
 
-void battle(float health, float mana, float damage, float speed, float maxHealth, float maxMana, char classs, string weapon, string armor, string art1, string art2, string art3, string enemy, float enemyHealth, float enemyMaxHealth, float enemyDamage, float enemySpeed, string sprite , int gold, int enemyGold, vector<string> Inventory){
-
+void battle(string enemy, float enemyHealth, float enemyMaxHealth, float enemyDamage, float enemySpeed, string sprite , int gold, int enemyGold, vector<string> Inventory){
   bool battling = false;
   char input;
   int tempspeed = 0;
@@ -170,7 +203,7 @@ void battle(float health, float mana, float damage, float speed, float maxHealth
       tempspeed = 0;
       if (input == 'A'){
         enemyHealth -= damage;
-        if (classs == 'M'){
+        if (clas == 'M'){
           mana -= 20;
           if (mana > maxMana){
             mana = maxMana;
@@ -188,7 +221,7 @@ void battle(float health, float mana, float damage, float speed, float maxHealth
         cout << "You took " << enemyDamage/2 << "!" << endl;
         health -= enemyDamage/2;
         tempspeed = 10000000;
-        if (classs == 'M'){
+        if (clas == 'M'){
           mana += 10;
           if (mana > maxMana){
             mana = maxMana;
@@ -223,7 +256,7 @@ void battle(float health, float mana, float damage, float speed, float maxHealth
 
 
 int main() {
-  Slime slimeEnemy;
+  Slime slime;
   //cout << "\e[8;50;50t";
   system("Color 03");
   // setup variables
@@ -382,7 +415,7 @@ int main() {
       )" << "\n";
       cout << "Chapter 0: Sands \n";
       cin >> input;
-      battle(health, mana, damage, speed, maxHealth, maxMana, clas, weapon, armor, artfact1, artfact2, artfact3, slimeEnemy.name, slimeEnemy.enemyhealth, slimeEnemy.maxEnemyHealth, slimeEnemy.enemyDamage, slimeEnemy.enemySpeed, slimeEnemy.sprite, gold, slimeEnemy.goldDrop , Inventory);
+      battle(slime.name, slime.enemyhealth, slime.maxEnemyHealth, slime.enemyDamage, slime.enemySpeed, slime.sprite, gold, slime.goldDrop, Inventory);
       system("cls");
       if (health <= 0){
         death();
@@ -406,7 +439,7 @@ int main() {
       )" << "\n";
       cout << "Chapter 0: Sands \n";
       cin >> input;
-      battle(health, mana, damage, speed, maxHealth, maxMana, clas, weapon, armor, artfact1, artfact2, artfact3, slimeEnemy.name, slimeEnemy.enemyhealth, slimeEnemy.maxEnemyHealth, slimeEnemy.enemyDamage, slimeEnemy.enemySpeed, slimeEnemy.sprite, gold, slimeEnemy.goldDrop , Inventory);
+      //battle(slimeEnemy.name, slimeEnemy.enemyhealth, slimeEnemy.maxEnemyHealth, slimeEnemy.enemyDamage, slimeEnemy.enemySpeed, slimeEnemy.sprite, gold, slimeEnemy.goldDrop , Inventory);
       system("cls");
       if (health <= 0){
         death();
