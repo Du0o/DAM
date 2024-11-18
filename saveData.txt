@@ -13,4 +13,4 @@ None
 None
 basicWand
 None
-2
+1
