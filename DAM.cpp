@@ -442,14 +442,17 @@ int main() {
       play = true;
     }
     else if (input == 'C'){
+      int size = Inventory.size();
       // continue adventure
       ifstream file("saveData.txt");
       file >> clas >> name >> health >> maxHealth >> mana >> maxMana >> damage >> speed >> gold >> chapterIndex >> artfact1 >> artfact2 >> artfact3 >> weapon >> armor >> campainIndex; 
       Inventory.clear();
-      for (int i = 0; i < 3; i++){
+      for (int i = 0; i < 255; i++){
         string re = "";
         file >> re;
-        Inventory.push_back(re);
+        if (re != ""){
+          Inventory.push_back(re);
+        }
       }
       file.close();
       play = true;
@@ -476,6 +479,7 @@ int main() {
       cout << "Chapter 0: Sands" << endl;
       shop("HealthPotion", "none", "none", "none", "none", 10, 20, 30, 40, 50);
       showInventory();
+      saveData();
       cout << "" << endl;
       cin >> input;
     }

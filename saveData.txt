@@ -6,7 +6,7 @@ ted
 100
 50
 50
-0
+-80
 0
 None
 None
@@ -14,3 +14,11 @@ None
 basicWand
 None
 1
+HealthPotion
+HealthPotion
+HealthPotion
+HealthPotion
+HealthPotion
+HealthPotion
+HealthPotion
+HealthPotion
